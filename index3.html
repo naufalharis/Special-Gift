@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday · Gift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+    <!-- Background love floating -->
+    <div class="background">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+    </div>
+
+    <div class="container">
+        <div class="card">
+
+            <!-- Efek sorotan cahaya di belakang gambar -->
+            <div class="glow-effect"></div>
+
+            <p class="sub-message" id="tapText">TAP THE GIFT...</p>
+
+            <!-- Gambar gift -->
+            <div class="image-wrapper" id="giftWrapper">
+                <img src="images/gift.png" 
+                    alt="Gift Tertutup"
+                    class="center-image"
+                    id="giftImage">
+            </div>
+
+            <!-- CARD PESAN UCAPAN - DENGAN ANIMASI -->
+            <div class="message-card" id="messageCard">
+                <div class="card-header">
+                    <h2>Happy Birthday, my love!</h2>
+                </div>
+                
+                <div class="card-body">
+                    <p>
+                        I'm so grateful to have you in my life.
+                    </p>
+                    <p>
+                        Thank you for always making my days brighter with your love and smile, and always make my life so beautiful because you. I hope this year brings you happiness, good health, and all the success you deserve. No matter what happens, I'll always be here for you.
+                    </p>
+                    <p class="signature">
+                        I love you so much. Have the most amazing birthday!
+                    </p>
+                </div>
+
+                <button class="close-message" id="closeMessageBtn">Tutup</button>
+            </div>
+        </div>
+        
+        <!-- BACK BUTTON -->
+        <a href="index.html" class="back-button" aria-label="Kembali">
+            <span class="arrow-icon">↩</span>
+        </a>
+        
+        <!-- NEXT BUTTON -->
+        <a href="index4.html" class="next-button" aria-label="Lanjut">
+            <span class="arrow-icon">↪</span>
+        </a>
+    </div>
+
+    <script>
+        (function() {
+            const giftImage = document.getElementById('giftImage');
+            const giftWrapper = document.getElementById('giftWrapper');
+            const messageCard = document.getElementById('messageCard');
+            const closeBtn = document.getElementById('closeMessageBtn');
+            const tapText = document.getElementById('tapText');
+
+            const img1 = 'images/gift.png';
+            const img2 = 'images/gift-open.png';
+
+            let isGiftOpened = false;
+
+            function openGift() {
+                if (isGiftOpened) return;
+                isGiftOpened = true;
+
+                giftWrapper.classList.add('opened');
+                giftImage.src = img2;
+
+                setTimeout(() => {
+                    messageCard.classList.add('show');
+                }, 240);
+
+                giftWrapper.style.animation = 'none';
+                setTimeout(() => {
+                    giftWrapper.style.animation = 'bounceImage 4s ease-in-out infinite';
+                }, 10);
+            }
+
+            function closeGift() {
+                if (!isGiftOpened) return;
+                isGiftOpened = false;
+
+                giftWrapper.classList.remove('opened');
+                messageCard.classList.remove('show');
+
+                setTimeout(() => {
+                    giftImage.src = img1;
+                    tapText.textContent = 'TAP THE GIFT...';
+                }, 180);
+
+                giftWrapper.style.animation = 'none';
+                setTimeout(() => {
+                    giftWrapper.style.animation = 'bounceImage 4s ease-in-out infinite';
+                }, 10);
+            }
+
+            giftWrapper.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isGiftOpened) return;
+                openGift();
+            });
+
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeGift();
+            });
+
+            messageCard.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        })();
+    </script>
+
+</body>
+</html>

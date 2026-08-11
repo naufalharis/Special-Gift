@@ -28,7 +28,9 @@ body {
             #8b556d 30%,
             #5b3449 70%,
             #36202d 100%);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* =========================
@@ -130,7 +132,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 20px 20px calc(24px + env(safe-area-inset-bottom));
     position: relative;
     z-index: 1;
 }

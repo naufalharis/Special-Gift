@@ -21,6 +21,8 @@ body {
         radial-gradient(circle at bottom right, rgba(0, 0, 0, .35) 0%, transparent 45%),
         linear-gradient(180deg, #74495f 0%, #8b556d 30%, #5b3449 70%, #36202d 100%);
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 20px;
 }
 
@@ -60,7 +62,7 @@ body {
     max-width: 500px;
     position: relative;
     z-index: 1;
-    padding: 20px 15px 80px;
+    padding: 20px 15px calc(90px + env(safe-area-inset-bottom));
 }
 
 /* ===== TITLE ===== */

@@ -46,6 +46,7 @@ body {
 
 .background span {
     position: absolute;
+    font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', sans-serif;
     font-size: 90px;
     color: rgba(255, 255, 255, .12);
     filter: blur(10px);

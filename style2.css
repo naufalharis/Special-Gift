@@ -104,6 +104,7 @@ body {
 
 .card-bg-love span {
     position: absolute;
+    font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', sans-serif;
     font-size: clamp(30px, 8vw, 55px);
     color: rgba(255, 255, 255, 0.06);
     filter: blur(4px);

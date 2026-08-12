@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Gallery</title>
+    <title>Our Gallery - Jemuran Kenangan</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style4.css">
 </head>
 <body>
@@ -22,37 +21,80 @@
     </div>
 
     <div class="container">
-        <h1 class="page-title">Our Moments</h1>
+        <h1 class="page-title">Our Gallery</h1>
         <p class="page-subtitle">Special Photos</p>
 
-        <!-- Grid 4 Foto -->
-        <div class="gallery-grid">
-            <div class="photo-card">
+        <!-- Tali Jemuran Atas - Melengkung ke bawah di tengah -->
+        <div class="clothesline-top">
+            <svg class="line-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
+                <path d="M 0,15 C 20,45 40,5 50,25 C 60,45 80,10 100,20" 
+                      stroke="#d4b89a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <path d="M 0,15 C 20,45 40,5 50,25 C 60,45 80,10 100,20" 
+                      stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Galeri Foto - Baris Atas (3 foto) -->
+        <div class="gallery-row top-row">
+            <div class="photo-card" style="margin-left: 2%; margin-top: -7px;">
+                <div class="clothespin-top"></div>
                 <div class="photo-wrapper">
                     <img src="images/photo1.jfif" alt="Photo 1" class="photo">
                 </div>
                 <p class="photo-caption">First Memory</p>
             </div>
 
-            <div class="photo-card">
+            <div class="photo-card" style="margin-top: -8px;">
+                <div class="clothespin-top"></div>
                 <div class="photo-wrapper">
                     <img src="images/photo2.jfif" alt="Photo 2" class="photo">
                 </div>
                 <p class="photo-caption">Beautiful Day</p>
             </div>
 
-            <div class="photo-card">
+            <div class="photo-card" style="margin-right: 2%; margin-top: -13px;">
+                <div class="clothespin-top"></div>
                 <div class="photo-wrapper">
                     <img src="images/photo3.jfif" alt="Photo 3" class="photo">
                 </div>
                 <p class="photo-caption">Together</p>
             </div>
+        </div>
 
-            <div class="photo-card">
+        <!-- Tali Jemuran Bawah - Melengkung ke atas di tengah (tidak sejajar) -->
+        <div class="clothesline-bottom">
+            <svg class="line-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
+                <path d="M 0,35 C 18,5 35,48 50,22 C 65,3 82,40 100,30" 
+                      stroke="#d4b89a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <path d="M 0,35 C 18,5 35,48 50,22 C 65,3 82,40 100,30" 
+                      stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Galeri Foto - Baris Bawah (3 foto) -->
+        <div class="gallery-row bottom-row">
+            <div class="photo-card" style="margin-left: 2%; margin-top: -9px;">
+                <div class="clothespin-top"></div>
                 <div class="photo-wrapper">
                     <img src="images/photo4.jfif" alt="Photo 4" class="photo">
                 </div>
                 <p class="photo-caption">Forever</p>
+            </div>
+
+            <div class="photo-card" style="margin-top: -10px;">
+                <div class="clothespin-top"></div>
+                <div class="photo-wrapper">
+                    <img src="images/photo5.jfif" alt="Photo 5" class="photo">
+                </div>
+                <p class="photo-caption">Smile</p>
+            </div>
+
+            <div class="photo-card" style="margin-right: 2%; margin-top: -8px;">
+                <div class="clothespin-top"></div>
+                <div class="photo-wrapper">
+                    <img src="images/photo6.jfif" alt="Photo 6" class="photo">
+                </div>
+                <p class="photo-caption">Love</p>
             </div>
         </div>
 
@@ -79,7 +121,6 @@
         const modalCaption = document.getElementById('modalCaption');
         const modalClose = document.getElementById('modalClose');
 
-        // Semua foto
         const photos = document.querySelectorAll('.photo');
         const captions = document.querySelectorAll('.photo-caption');
 
@@ -87,21 +128,14 @@
             photo.addEventListener('click', function() {
                 modal.style.display = 'flex';
                 modalImg.src = this.src;
-                modalCaption.textContent = captions[index].textContent;
+                modalCaption.textContent = captions[index]?.textContent || 'Kenangan';
             });
         });
 
-        // Tutup modal
-        modalClose.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                modal.style.display = 'none';
-            }
+        modalClose.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
         });
     </script>
-
 </body>
 </html>

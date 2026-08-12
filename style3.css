@@ -52,75 +52,94 @@ body {
     filter: blur(10px);
     user-select: none;
     animation: float 10s ease-in-out infinite;
+    animation-fill-mode: both;
 }
 
 .background span:nth-child(1) {
     top: -20px;
     left: -15px;
     font-size: 150px;
+    animation-delay: 0s;
 }
 .background span:nth-child(2) {
     top: 40px;
     right: 20px;
     font-size: 120px;
+    animation-delay: 0.8s;
 }
 .background span:nth-child(3) {
     top: 170px;
     left: 90px;
     font-size: 110px;
+    animation-delay: 1.6s;
 }
 .background span:nth-child(4) {
     top: 260px;
     right: -25px;
     font-size: 150px;
+    animation-delay: 0.4s;
 }
 .background span:nth-child(5) {
     top: 360px;
     left: -30px;
     font-size: 130px;
+    animation-delay: 1.2s;
 }
 .background span:nth-child(6) {
     top: 470px;
     right: 60px;
     font-size: 100px;
+    animation-delay: 2.0s;
 }
 .background span:nth-child(7) {
     top: 560px;
     left: 130px;
     font-size: 120px;
+    animation-delay: 0.6s;
 }
 .background span:nth-child(8) {
     bottom: 120px;
     left: -20px;
     font-size: 140px;
+    animation-delay: 1.4s;
 }
 .background span:nth-child(9) {
     bottom: 70px;
     right: 15px;
     font-size: 120px;
+    animation-delay: 2.2s;
 }
 .background span:nth-child(10) {
     bottom: -20px;
     left: 100px;
     font-size: 170px;
+    animation-delay: 0.2s;
 }
 .background span:nth-child(11) {
     top: 90px;
     left: 230px;
     font-size: 90px;
+    animation-delay: 1.0s;
 }
 .background span:nth-child(12) {
     bottom: 250px;
     right: 120px;
     font-size: 110px;
+    animation-delay: 1.8s;
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.12;
     }
     50% {
-        transform: translateY(-18px);
+        transform: translateY(-18px) scale(1.05);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.12;
     }
 }
 
@@ -139,7 +158,7 @@ body {
 }
 
 /* =========================
-   CARD UTAMA - TANPA ANIMASI
+   CARD UTAMA
 ========================= */
 .card {
     position: relative;
@@ -155,7 +174,7 @@ body {
 }
 
 /* =========================
-   EFEK SOROTAN CAHAYA
+   EFEK SOROTAN CAHAYA - DENGAN ANIMASI MASUK
 ========================= */
 .glow-effect {
     position: absolute;
@@ -163,7 +182,6 @@ body {
     height: 200px;
     top: 42%;
     left: 50%;
-    transform: translate(-50%, -50%);
     background: radial-gradient(circle,
             rgba(255, 215, 215, 0.6) 0%,
             rgba(255, 180, 180, 0.3) 30%,
@@ -171,9 +189,23 @@ body {
             transparent 80%);
     border-radius: 50%;
     filter: blur(30px);
-    animation: glowPulse 3s ease-in-out infinite;
     z-index: 1;
     pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    animation: glowEntrance 1s ease-out 0.3s forwards,
+               glowPulse 3s ease-in-out infinite 1.3s;
+}
+
+@keyframes glowEntrance {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 @keyframes glowPulse {
@@ -188,7 +220,7 @@ body {
 }
 
 /* =========================
-   GAMBAR GIFT
+   GAMBAR GIFT - DENGAN ANIMASI MASUK
 ========================= */
 .image-wrapper {
     position: relative;
@@ -200,11 +232,37 @@ body {
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
-    transition: transform 0.35s ease;
+    /* Default state - invisible */
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg) translateY(-60px);
+    /* Animasi masuk */
+    animation: giftEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: transform 0.3s ease;
 }
 
+@keyframes giftEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-15deg) translateY(-60px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.15) rotate(5deg) translateY(-10px);
+    }
+    80% {
+        transform: scale(0.95) rotate(-3deg) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg) translateY(0);
+    }
+}
+
+/* State ketika dibuka */
 .image-wrapper.opened {
-    transform: translateY(-8px) scale(1.04);
+    animation: none !important;
+    transform: translateY(-8px) scale(1.04) !important;
+    opacity: 1 !important;
 }
 
 .center-image {
@@ -213,17 +271,19 @@ body {
     height: 200%;
     object-fit: contain;
     display: block;
-    animation: bounceImage 4s ease-in-out infinite;
     transition: transform 0.2s ease, filter 0.3s ease;
     user-select: none;
     -webkit-user-drag: none;
     border-radius: 20px;
+    /* Animasi bounce berjalan terus */
+    animation: bounceImage 4s ease-in-out infinite;
 }
 
 .center-image:active {
     transform: scale(0.94);
 }
 
+/* Animasi bounce untuk gambar */
 @keyframes bounceImage {
     0%, 100% {
         transform: translateY(0) scale(1);
@@ -233,6 +293,9 @@ body {
     }
 }
 
+/* =========================
+   SUB MESSAGE - DENGAN ANIMASI MASUK
+========================= */
 .sub-message {
     position: relative;
     z-index: 2;
@@ -243,9 +306,30 @@ body {
     color: #f9e8e7;
     padding: 0 10px;
     margin-top: 6px;
-    opacity: 0.9;
+    opacity: 0;
     letter-spacing: 2px;
     transition: all 0.3s ease;
+    transform: translateY(20px);
+    animation: subMessageEntrance 0.8s ease-out 0.6s forwards;
+}
+
+/* Hide sub-message when gift is opened */
+.sub-message.hidden {
+    opacity: 0 !important;
+    transform: translateY(8px) scale(0.98) !important;
+    transition: opacity 200ms ease, transform 200ms ease;
+    pointer-events: none;
+}
+
+@keyframes subMessageEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
 }
 
 /* =========================
@@ -359,18 +443,6 @@ body {
     }
 }
 
-/* ANIMASI TOMBOL CLOSE BERDENYUT */
-@keyframes buttonPulse {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 6px 20px rgba(192, 57, 90, 0.35);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 6px 30px rgba(192, 57, 90, 0.6);
-    }
-}
-
 /* =========================
    HEADER CARD
 ========================= */
@@ -439,10 +511,10 @@ body {
 }
 
 /* =========================
-   BACK & NEXT BUTTON - TANPA ANIMASI
+   BACK & NEXT BUTTON - DENGAN ANIMASI MASUK
 ========================= */
 .back-button {
-    position: absolute;
+    position: fixed;
     left: 25px;
     bottom: 25px;
     z-index: 12;
@@ -460,10 +532,13 @@ body {
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 4px 15px rgba(238, 146, 153, 0.4);
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: buttonEntranceLeft 0.6s ease-out 0.8s forwards;
 }
 
 .next-button {
-    position: absolute;
+    position: fixed;
     right: 25px;
     bottom: 25px;
     z-index: 12;
@@ -481,6 +556,31 @@ body {
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 4px 15px rgba(238, 146, 153, 0.4);
+    opacity: 0;
+    transform: translateX(50px);
+    animation: buttonEntranceRight 0.6s ease-out 0.8s forwards;
+}
+
+@keyframes buttonEntranceLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes buttonEntranceRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
 
 .back-button .arrow-icon,
@@ -578,16 +678,6 @@ body {
         padding: 24px 18px 20px;
         max-height: 82vh;
     }
-    
-    .back-button,
-    .next-button {
-        width: clamp(44px, 13vw, 54px);
-        height: clamp(35px, 10vw, 44px);
-        font-size: clamp(24px, 6.5vw, 30px);
-        bottom: 20px;
-    }
-    .back-button { left: 18px; }
-    .next-button { right: 18px; }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
